@@ -6,11 +6,12 @@ import { router as productsRouter } from "./routes/productsRouter.js"
 import { router as cartsRouter } from "./routes/cartsRouter.js";
 import { router as viewsRouter } from "./routes/viewsRouter.js";
 import __dirname from "./utils.js";
-
-
+import ProductManager from './dao/productManager.js';
 
 const port=8080;
 const app=express();
+
+const p = new ProductManager();
 
 //App.use para utilizar los routers
 app.use(express.json())
@@ -37,8 +38,6 @@ const expressServer=app.listen(port, ()=>console.log(`Server corriendo en puerto
 const socketServer = new Server(expressServer);
 
 socketServer.on('connection', (socket)=>{   
-    console.log("Se ha conectado un cliente");
+    const products = p.getProducts();    
+    socket.emit('Products', products);    
 });
-
-/*<script  src="/socket.io/socket.io.js"></script>
-<script src="/js/index.js"></script>*/

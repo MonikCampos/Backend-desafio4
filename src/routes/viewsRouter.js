@@ -8,3 +8,6 @@ router.get('/',(req,res)=>{
     return  res.render('home',{products});
 });
 
+router.get('/realtimeproducts',(req,res)=>{
+    return  res.render('realTimeProducts');
+});
