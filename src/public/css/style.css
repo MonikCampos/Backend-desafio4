@@ -1,0 +1,27 @@
+/* Estilos para la tabla */
+table {
+    width: 80%;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+thead {
+    text-transform: uppercase;
+}
+
+/* Estilos para las celdas de la tabla */
+th, td {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+
+/* Estilos para las celdas del encabezado */
+th {
+    background-color:#C1B4AE;
+}
+
+tbody {
+    background-color: #FFE2D0;
+}
+/* Estilos para las filas de la tabla al pasar el mouse */
+tr:hover {background-color: #ddd;}
