@@ -1,9 +1,10 @@
 import express  from 'express';
-//import {Server} from 'socket.io';
+import {Server} from 'socket.io';
 import { engine } from 'express-handlebars';
 
 import { router as productsRouter } from "./routes/productsRouter.js"
 import { router as cartsRouter } from "./routes/cartsRouter.js";
+import { router as viewsRouter } from "./routes/viewsRouter.js";
 import __dirname from "./utils.js";
 
 
@@ -22,11 +23,22 @@ app.set('views', __dirname + '/views');
 
 
 //rutas
-app.get( "/", (req, res) => {
-    return res.render("home");
-})
-app.use("/api/products", productsRouter)
-app.use("/api/carts", cartsRouter)
+//app.get( "/", (req, res) => {
+//    return res.render("home");
+//})
+
+app.use("/", viewsRouter);
+app.use("/api/products", productsRouter);
+app.use("/api/carts", cartsRouter);
+
 
 //el servidor escucha en el puerto 3000
-app.listen(port, ()=>console.log(`Server corriendo en puerto ${port}`))
+const expressServer=app.listen(port, ()=>console.log(`Server corriendo en puerto ${port}`))
+const socketServer = new Server(expressServer);
+
+socketServer.on('connection', (socket)=>{   
+    console.log("Se ha conectado un cliente");
+});
+
+/*<script  src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>*/
