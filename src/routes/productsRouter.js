@@ -56,7 +56,8 @@ router.post("/", async(req, res)=>{
     // resto validaciones ...
     
     try {
-        let newProduct=await Products.addProduct(title, description, price, status, code, stock, category, brand, thumbnail) 
+        //let newProduct=await Products.addProduct(title, description, price, status, code, stock, category, brand, thumbnail) 
+        let newProduct=await Products.addProduct({...req.body}); 
         res.setHeader('Content-Type','application/json');
         return res.status(200).json(newProduct);
     } catch (error) {

@@ -21,3 +21,31 @@ socket.on('Products', products => {
         `;
     });
 });
+
+const form = document.getElementById( "productForm" );
+form.addEventListener( "submit", function ( event ) {
+    event.preventDefault();
+    //Captar  los datos del formulario
+    const title = document.getElementById('title').value;
+    const description = document.getElementById('description').value;
+    const price = document.getElementById('price').value;
+    const code=document.getElementById('code').value;   
+    const status = document.getElementById('status').value;    
+    const stock = document.getElementById('stock').value;  
+    const category = document.getElementById('category').value;
+    const brand = document.getElementById('brand').value;
+
+    //Enviar el producto a travez de web socket
+    const producto = {
+        title,
+        description,
+        price,
+        code,
+        status,
+        stock,
+        category,
+        brand
+    }
+    socket.emit( 'nuevoProducto', producto);
+    form.reset();
+});

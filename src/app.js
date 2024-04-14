@@ -39,5 +39,12 @@ const socketServer = new Server(expressServer);
 
 socketServer.on('connection', (socket)=>{   
     const products = p.getProducts();    
-    socket.emit('Products', products);    
+    socket.emit('Products', products); 
+    
+    socket.on('nuevoProducto', producto =>{        
+        console.log({producto});
+        const result =  p.addProduct(producto);                  
+        if (result.producto)
+            socket.emit('Products', result.producto);
+    });
 });

@@ -3,7 +3,7 @@ import fs  from 'fs';
 class ProductManager {
     #products;
     #path;
-    static idProduct=0;
+    
     constructor() {
         this.#path="./src/data/products.json";
         this.#products = this.#readProductsInFile();
@@ -31,7 +31,7 @@ class ProductManager {
         }
     }
 
-    addProduct(title, description, price, status=true, code, stock, category, brand, thumbnail=[]) {  
+    addProduct({title, description, price, status=true, code, stock, category, brand, thumbnail=[]}) {  
         let resultado ="";
         if (!title || !description || !price || !code || !stock || !category || !brand)
             throw new Error(`Faltan datos requeridos: Title:${title} - Description:${description} - Code:${code} - Price:${price} - Stock:${stock} - Category:${category} - Brand:${brand}`);       
